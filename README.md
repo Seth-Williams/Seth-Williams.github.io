@@ -3,7 +3,7 @@
 Click [**Use this template**](https://github.com/mmistakes/mm-github-pages-starter/generate) button above for the quickest method of getting started with the [Minimal Mistakes Jekyll theme](https://github.com/mmistakes/minimal-mistakes).
 
 Contains basic configuration to get you a site with:
-
+Test line
 - Sample posts.
 - Sample top navigation.
 - Sample author sidebar with social links.
