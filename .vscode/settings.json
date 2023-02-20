@@ -1,7 +1,14 @@
 {
     "cSpell.words": [
+        "CISSP",
         "Infoblox",
+        "OSCP",
+        "OSWE",
         "Pueo",
-        "SIGINT"
+        "SIGINT",
+        "SSCP"
+    ],
+    "cSpell.ignoreWords": [
+        "Pentest"
     ]
 }
