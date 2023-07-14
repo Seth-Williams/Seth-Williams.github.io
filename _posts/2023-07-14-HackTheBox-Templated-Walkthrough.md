@@ -48,7 +48,7 @@ With the SSTI being confirmed we can start to develop the payload to (hopefully)
 
 ## RCE
 
-The Jinja2 engine does limit what can be injected. For instance, `{{ ls }}` and `{{ import os; os.system("ls") }}` are not going to work. Although, it does allow for the use of builtin python methods. A simple example is using a string manipulation method like `.upper` to see that `{{"test".upper()}}` gets reflected as `TEST`.&#x20;
+The Jinja2 engine does limit what can be injected. For instance, `{{ ls }}` and `{{ import os; os.system("ls") }}` are not going to work. Although, it does allow for the use of built-in python methods. A simple example is using a string manipulation method like `.upper` to see that `{{"test".upper()}}` gets reflected as `TEST`.&#x20;
 
 <figure><img src="../assets/images/post1/image7.png" alt=""><figcaption></figcaption></figure>
 
@@ -68,7 +68,7 @@ At this point, the payload is able to execute arbitrary commands on the system a
 http://targetip:port/{{self.__init__.__globals__.__builtins__.__import__('os').popen('id').read() }}
 ```
 
-<figure><img src="../assets/images/post1/image10.pngg" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image10.png" alt=""><figcaption></figcaption></figure>
 
 From here, all that's left to do is grab the flag.
 
@@ -78,14 +78,14 @@ I hope this has been helpful and feel free to message me on Twitter or LinkedIn 
 
 ## References
 
-{% embed url="https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection/jinja2-ssti" %}
+https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection/jinja2-ssti
 
-{% embed url="https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/README.md#jinja2---remote-code-execution" %}
+https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/README.md#jinja2---remote-code-execution
 
-{% embed url="https://www.tutorialspoint.com/python/os_popen.htm" %}
+https://www.tutorialspoint.com/python/os_popen.htm
 
-{% embed url="https://jinja.palletsprojects.com/en/3.1.x/" %}
+https://jinja.palletsprojects.com/en/3.1.x/
 
-{% embed url="https://portswigger.net/research/server-side-template-injection" %}
+https://portswigger.net/research/server-side-template-injection
 
-{% embed url="https://mathspp.com/blog/pydonts/dunder-methods" %}
+https://mathspp.com/blog/pydonts/dunder-methods
