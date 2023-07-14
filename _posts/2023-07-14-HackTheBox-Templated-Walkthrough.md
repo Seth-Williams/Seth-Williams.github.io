@@ -1,14 +1,3 @@
----
-title: "HackTheBox Templated Walkthrough"
-categories:
-  - Web
-tags:
-  - HTB
-  - SSTI
-  - Web Hacking
----
-
-
 ## Introduction
 
 In preparation for OffSec's OSWE exam, I will be going through some of the active web challenges on HackTheBox. Templated is an easy rated challenge that focuses on a SSTI vulnerability in the Jinja2 templating engine.&#x20;
