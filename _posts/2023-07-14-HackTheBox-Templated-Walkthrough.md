@@ -54,9 +54,11 @@ The Jinja2 engine does limit what can be injected. For instance, `{{ ls }}` and 
 
 With this knowledge, I will call the `self` variable and access the "magic" methods. The `self` variable is just a reference to the current instance of the class. Magic methods are methods that start and end with double underscores and allow instances of classes to interact with built-in functions. Below is the updated payload:
 
+{% raw %}
 ```
 http://targetip:port/{{ self.__init__.__globals__.__builtins__ }}
 ```
+{% endraw %}
 
 <figure><img src="../assets/images/post1/image9.png" alt=""><figcaption></figcaption></figure>
 
@@ -64,9 +66,11 @@ The payload has successfully broken out of the "jail" it was in. To further deve
 
 At this point, the payload is able to execute arbitrary commands on the system as root.&#x20;
 
+{% raw %}
 ```
 http://targetip:port/{{self.__init__.__globals__.__builtins__.__import__('os').popen('id').read() }}
 ```
+{% endraw %}
 
 <figure><img src="../assets/images/post1/image10.png" alt=""><figcaption></figcaption></figure>
 
