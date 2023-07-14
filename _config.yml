@@ -58,7 +58,7 @@ plugins:
 author:
   name   : "Seth Williams"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "Senior Penetration Tester"
+  bio    : "Penetration Tester"
   links:
   #  - label: "Website"
   #    icon: "fas fa-fw fa-link"
