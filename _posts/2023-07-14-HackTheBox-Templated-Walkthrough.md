@@ -10,23 +10,23 @@ In preparation for OffSec's OSWE exam, I will be going through some of the activ
 
 After spinning up the machine and visiting the web page we can see that the site is not configured.
 
-<figure><img src="../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image2.png" alt=""><figcaption></figcaption></figure>
 
 The only valuable information from here is that the site is being run on flask/jinja2. Flask is a web application framework written in Python and utilizes Jinja2 as its templating engine.&#x20;
 
 A quick google search for "flask/jinja2 vulnerabilities" shows that Jinja2 might be vulnerable to SSTI (Server Side Template Injection).&#x20;
 
-<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image3.png" alt=""><figcaption></figcaption></figure>
 
 Before acting on this, I'll continue to do basic web enumeration. With such a small attack surface it's a good idea to try to discover new content using a tool like [feroxbuster](https://github.com/epi052/feroxbuster).&#x20;
 
-<figure><img src="../.gitbook/assets/image (60).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image4.png" alt=""><figcaption></figcaption></figure>
 
 Feroxbuster does not return any valuable results. The '200' responses are from URLs with spaces (%20) in them, but they do not actually exist. The rest are also false positives.&#x20;
 
 Without much to go off of, we can start out testing from the one input point that we can control, the URL.&#x20;
 
-<figure><img src="../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image5.png" alt=""><figcaption></figcaption></figure>
 
 By manually browsing to a page we can see that the path is reflected on the web page. This is worth noting as it means that user provided input is processed by the web server (in Python) and then reflected back to the browser. This can be vulnerable to many different vulnerability types depending on the processing that is happening on the backend.&#x20;
 
@@ -42,7 +42,7 @@ To detect this vulnerability and differentiate it from a simple XSS,  a payload 
 
 The payload `{{7*7}}` should reflect '49' on the page if it vulnerable.&#x20;
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image6.png" alt=""><figcaption></figcaption></figure>
 
 With the SSTI being confirmed we can start to develop the payload to (hopefully) gain RCE.&#x20;
 
@@ -50,7 +50,7 @@ With the SSTI being confirmed we can start to develop the payload to (hopefully)
 
 The Jinja2 engine does limit what can be injected. For instance, `{{ ls }}` and `{{ import os; os.system("ls") }}` are not going to work. Although, it does allow for the use of builtin python methods. A simple example is using a string manipulation method like `.upper` to see that `{{"test".upper()}}` gets reflected as `TEST`.&#x20;
 
-<figure><img src="../.gitbook/assets/image (47).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image7.png" alt=""><figcaption></figcaption></figure>
 
 With this knowledge, I will call the `self` variable and access the "magic" methods. The `self` variable is just a reference to the current instance of the class. Magic methods are methods that start and end with double underscores and allow instances of classes to interact with built-in functions. Below is the updated payload:
 
@@ -58,7 +58,7 @@ With this knowledge, I will call the `self` variable and access the "magic" meth
 http://targetip:port/{{ self.__init__.__globals__.__builtins__ }}
 ```
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image9.png" alt=""><figcaption></figcaption></figure>
 
 The payload has successfully broken out of the "jail" it was in. To further develop this, the desired module (in this case, `os`) can be imported and the OS command passed to `popen()` method.&#x20;
 
@@ -68,11 +68,11 @@ At this point, the payload is able to execute arbitrary commands on the system a
 http://targetip:port/{{self.__init__.__globals__.__builtins__.__import__('os').popen('id').read() }}
 ```
 
-<figure><img src="../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image10.pngg" alt=""><figcaption></figcaption></figure>
 
 From here, all that's left to do is grab the flag.
 
-<figure><img src="../.gitbook/assets/image (56).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../assets/images/post1/image11.png" alt=""><figcaption></figcaption></figure>
 
 I hope this has been helpful and feel free to message me on Twitter or LinkedIn if you have any questions.&#x20;
 
