@@ -78,14 +78,14 @@ I hope this has been helpful and feel free to message me on Twitter or LinkedIn 
 
 ## References
 
-https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection/jinja2-ssti
+<https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection/jinja2-ssti>
 
-https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/README.md#jinja2---remote-code-execution
+<https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Server%20Side%20Template%20Injection/README.md#jinja2---remote-code-execution>
 
-https://www.tutorialspoint.com/python/os_popen.htm
+<https://www.tutorialspoint.com/python/os_popen.htm>
 
-https://jinja.palletsprojects.com/en/3.1.x/
+<https://jinja.palletsprojects.com/en/3.1.x/>
 
-https://portswigger.net/research/server-side-template-injection
+<https://portswigger.net/research/server-side-template-injection>
 
-https://mathspp.com/blog/pydonts/dunder-methods
+<https://mathspp.com/blog/pydonts/dunder-methods>
