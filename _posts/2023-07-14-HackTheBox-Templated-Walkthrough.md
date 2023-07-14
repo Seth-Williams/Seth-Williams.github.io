@@ -1,4 +1,13 @@
-# Templated
+---
+title: "HackTheBox Templated Walkthrough"
+categories:
+  - Web
+tags:
+  - HTB
+  - SSTI
+  - Web Hacking
+---
+
 
 ## Introduction
 
