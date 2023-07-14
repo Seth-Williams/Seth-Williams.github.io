@@ -40,7 +40,7 @@ From PortSwigger:
 
 To detect this vulnerability and differentiate it from a simple XSS,  a payload can be used that will actually be processed by the templating engine, Jinja2.
 
-The payload `{{7*7}}` should reflect '49' on the page if it is vulnerable.&#x20;
+The payload {% raw %}`{{7*7}}`{% endraw %} should reflect '49' on the page if it is vulnerable.&#x20;
 
 <figure><img src="../assets/images/post1/image6.png" alt=""><figcaption></figcaption></figure>
 
